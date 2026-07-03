@@ -1,0 +1,9 @@
+pandas
+requests
+psycopg2-binary
+python-dotenv
+google-cloud-storage
+google-cloud-bigquery
+pyspark
+jupyter
+dbt-bigquery
