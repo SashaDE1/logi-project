@@ -3,3 +3,5 @@ venv/
 keys/
 config/*.json
 .env
+__pycache__/
+.ipynb_checkpoints/
