@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres-logi:
+    image: postgres:15-alpine
+    container_name: postgres-logi
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - pgdata_logi:/var/lib/postgresql/data
+
+volumes:
+  pgdata_logi:
