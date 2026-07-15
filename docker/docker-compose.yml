@@ -13,5 +13,66 @@ services:
     volumes:
       - pgdata_logi:/var/lib/postgresql/data
 
+  postgres-airflow:
+    image: postgres:15-alpine
+    container_name: postgres-airflow
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - pgdata_airflow:/var/lib/postgresql/data
+
+  airflow-webserver:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: airflow-webserver
+    restart: always
+    depends_on:
+      - postgres-airflow
+    env_file:
+      - ../.env
+    volumes:
+      - ../dags:/opt/airflow/dags
+      - ../extract:/opt/airflow/extract
+      - ../config:/opt/airflow/config
+      - ../keys:/opt/airflow/keys
+    ports:
+      - "8080:8080"
+    command: webserver
+
+  airflow-scheduler:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: airflow-scheduler
+    restart: always
+    depends_on:
+      - postgres-airflow
+    env_file:
+      - ../.env
+    volumes:
+      - ../dags:/opt/airflow/dags
+      - ../extract:/opt/airflow/extract
+      - ../config:/opt/airflow/config
+      - ../keys:/opt/airflow/keys
+    command: scheduler
+  
+  airflow-init:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: airflow-init
+    env_file:
+      - ../.env
+    depends_on:
+      - postgres-airflow
+    volumes:
+      - ../dags:/opt/airflow/dags
+    command: version
+    entrypoint: /bin/bash -c "airflow db migrate && airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com"
+
 volumes:
   pgdata_logi:
+  pgdata_airflow:
