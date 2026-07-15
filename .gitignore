@@ -5,3 +5,5 @@ config/*.json
 .env
 __pycache__/
 .ipynb_checkpoints/
+spark/*.jar
+spark/hadoop/
