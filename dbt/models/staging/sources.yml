@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: staging
+    database: logis-data-sashar
+    schema: staging
+    tables:
+      - name: stg_stations_raw
+      - name: stg_status_raw
+      - name: stg_weather_raw
+      - name: stg_trips_raw

@@ -1,0 +1,17 @@
+name: 'logi_dbt'
+version: '1.0.0'
+config-version: 2
+
+profile: 'logi_bq'
+
+model-paths: ["models"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+
+models:
+  logi_dbt:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

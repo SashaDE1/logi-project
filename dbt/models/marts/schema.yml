@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dim_stations
+    columns:
+      - name: station_id
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_station_status
+    columns:
+      - name: station_id
+        tests:
+          - not_null
+      - name: dt
+        tests:
+          - not_null
+  - name: fct_trips_monthly
+    columns:
+      - name: start_station_name
+        tests:
+          - not_null
+      - name: total_trips
+        tests:
+          - not_null
