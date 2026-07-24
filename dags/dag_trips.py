@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from utils.notify import notify_failure
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 
@@ -6,6 +7,7 @@ default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
     'retries': 1,
+    'on_failure_callback': notify_failure,
     'retry_delay': timedelta(minutes=1),
 }
 
