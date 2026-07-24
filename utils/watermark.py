@@ -1,16 +1,13 @@
-import os
 import psycopg2
-from dotenv import load_dotenv
-
-load_dotenv()
+import config.settings as settings
 
 def get_db_connection():
     return psycopg2.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        port=os.getenv("DB_PORT", "5432"),
-        user=os.getenv("DB_USER", "logi_admin"),
-        password=os.getenv("DB_PASSWORD", "logi_secure_pass"),
-        dbname=os.getenv("DB_NAME", "logi_db")
+        host=settings.DB_HOST,
+        port=settings.DB_PORT,
+        user=settings.DB_USER,
+        password=settings.DB_PASSWORD,
+        dbname=settings.DB_NAME
     )
 
 def get_watermark(table_name):

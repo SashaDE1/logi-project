@@ -16,7 +16,7 @@ def upload_to_gcs(bucket_name, blob_name, data_string):
     print(f"gs://{bucket_name}/{blob_name}")
 
 def extract_stations():
-    table_name = "bronze_stations"
+    table_name = "stations"
     last_load = get_watermark(table_name)
     print(f"Текущая ватермарка для {table_name}: {last_load}")
 

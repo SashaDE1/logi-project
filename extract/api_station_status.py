@@ -1,4 +1,5 @@
 import os
+import config.settings
 from datetime import datetime, timezone
 import requests
 from google.cloud import storage

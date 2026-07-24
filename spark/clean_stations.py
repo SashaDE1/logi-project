@@ -4,7 +4,8 @@ from spark.config import get_spark_session, get_gcs_path
 
 def clean_stations():
     spark = get_spark_session("clean-stations")
-    
+    print("chunk.size =", spark.sparkContext.getConf().get("spark.hadoop.fs.gs.outputstream.upload.chunk.size"))
+
     bronze_path = get_gcs_path("bronze/stations/*.csv")
     print(f"Чтение из: {bronze_path}")
     df_raw = spark.read.option("header", "true").csv(bronze_path)

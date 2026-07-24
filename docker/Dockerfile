@@ -11,7 +11,7 @@ RUN apt-get update && \
 USER airflow
 
 RUN pip install --no-cache-dir \
-    pyspark \
+    pyspark==4.1.2 \
     google-cloud-storage \
     google-cloud-bigquery \
     psycopg2-binary \

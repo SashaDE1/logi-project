@@ -1,4 +1,5 @@
 import os
+import config.settings
 from dotenv import load_dotenv
 from google.cloud import bigquery
 from spark.config import get_gcs_path
